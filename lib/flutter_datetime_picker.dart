@@ -47,6 +47,8 @@ class DatePicker {
     locale: LocaleType.en,
     DateTime? currentTime,
     DatePickerTheme? theme,
+    Widget? selectedOverlay,
+    double diameterRatio = 1.1,
   }) async {
     return await Navigator.push(
       context,
@@ -58,6 +60,8 @@ class DatePicker {
         onCancel: onCancel,
         locale: locale,
         theme: theme,
+        selectedOverlay: selectedOverlay,
+        diameterRatio: diameterRatio,
         barrierLabel:
             MaterialLocalizations.of(context).modalBarrierDismissLabel,
         pickerModel: DatePickerModel(
@@ -83,6 +87,8 @@ class DatePicker {
     locale: LocaleType.en,
     DateTime? currentTime,
     DatePickerTheme? theme,
+    Widget? selectedOverlay,
+    double diameterRatio = 1.1,
   }) async {
     return await Navigator.push(
       context,
@@ -93,6 +99,8 @@ class DatePicker {
         onCancel: onCancel,
         locale: locale,
         theme: theme,
+        selectedOverlay: selectedOverlay,
+        diameterRatio: diameterRatio,
         barrierLabel:
             MaterialLocalizations.of(context).modalBarrierDismissLabel,
         pickerModel: TimePickerModel(
@@ -116,6 +124,8 @@ class DatePicker {
     locale: LocaleType.en,
     DateTime? currentTime,
     DatePickerTheme? theme,
+    Widget? selectedOverlay,
+    double diameterRatio = 1.1,
   }) async {
     return await Navigator.push(
       context,
@@ -126,6 +136,8 @@ class DatePicker {
         onCancel: onCancel,
         locale: locale,
         theme: theme,
+        selectedOverlay: selectedOverlay,
+        diameterRatio: diameterRatio,
         barrierLabel:
             MaterialLocalizations.of(context).modalBarrierDismissLabel,
         pickerModel: Time12hPickerModel(
@@ -154,6 +166,8 @@ class DatePicker {
     locale: LocaleType.en,
     DateTime? currentTime,
     DatePickerTheme? theme,
+    Widget? selectedOverlay,
+    double diameterRatio = 1.1,
   }) async {
     return await Navigator.push(
       context,
@@ -164,6 +178,8 @@ class DatePicker {
         onCancel: onCancel,
         locale: locale,
         theme: theme,
+        selectedOverlay: selectedOverlay,
+        diameterRatio: diameterRatio,
         barrierLabel:
             MaterialLocalizations.of(context).modalBarrierDismissLabel,
         pickerModel: DateTimePickerModel(
@@ -189,6 +205,8 @@ class DatePicker {
     locale: LocaleType.en,
     BasePickerModel? pickerModel,
     DatePickerTheme? theme,
+    Widget? selectedOverlay,
+    double diameterRatio = 1.1,
   }) async {
     return await Navigator.push(
       context,
@@ -200,6 +218,8 @@ class DatePicker {
         onCancel: onCancel,
         locale: locale,
         theme: theme,
+        selectedOverlay: selectedOverlay,
+        diameterRatio: diameterRatio,
         barrierLabel:
             MaterialLocalizations.of(context).modalBarrierDismissLabel,
         pickerModel: pickerModel,
@@ -218,6 +238,8 @@ class _DatePickerRoute<T> extends PopupRoute<T> {
     DatePickerTheme? theme,
     this.barrierLabel,
     this.locale,
+    this.selectedOverlay,
+    this.diameterRatio = 1.1,
     RouteSettings? settings,
     BasePickerModel? pickerModel,
   })  : this.pickerModel = pickerModel ?? DatePickerModel(),
@@ -234,6 +256,8 @@ class _DatePickerRoute<T> extends PopupRoute<T> {
   final LocaleType? locale;
   final DatePickerTheme theme;
   final BasePickerModel pickerModel;
+  final Widget? selectedOverlay;
+  final double diameterRatio;
 
   @override
   Duration get transitionDuration => const Duration(milliseconds: 200);
@@ -413,7 +437,8 @@ class _DatePickerState extends State<_DatePickerComponent> {
             onSelectedItemChanged: (int index) {
               selectedChangedWhenScrolling(index);
             },
-            selectionOverlay: widget.selectedOverlay ?? CupertinoPickerDefaultSelectionOverlay(),
+            selectionOverlay: widget.selectedOverlay ??
+                CupertinoPickerDefaultSelectionOverlay(),
             diameterRatio: widget.diameterRatio,
             useMagnifier: true,
             itemBuilder: (BuildContext context, int index) {
@@ -589,12 +614,12 @@ class _DatePickerState extends State<_DatePickerComponent> {
     return Container(
       height: theme.titleHeight,
       decoration: BoxDecoration(
-        color: theme.headerColor ?? theme.backgroundColor,
-        border: Border(bottom: BorderSide(
-          color: theme.headerBorderColor,
-          width: 1.0,
-        ))
-      ),
+          color: theme.headerColor ?? theme.backgroundColor,
+          border: Border(
+              bottom: BorderSide(
+            color: theme.headerBorderColor,
+            width: 1.0,
+          ))),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
