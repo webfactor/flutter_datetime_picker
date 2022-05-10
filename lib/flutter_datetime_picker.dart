@@ -281,6 +281,8 @@ class _DatePickerComponent extends StatefulWidget {
     required this.route,
     required this.datePickerFormat,
     required this.pickerModel,
+    this.selectedOverlay,
+    this.diameterRatio = 1.1,
     this.onChanged,
     this.locale,
   }) : super(key: key);
@@ -295,6 +297,10 @@ class _DatePickerComponent extends StatefulWidget {
   final LocaleType? locale;
 
   final BasePickerModel pickerModel;
+
+  final Widget? selectedOverlay;
+
+  final double diameterRatio;
 
   @override
   State<StatefulWidget> createState() {
@@ -407,6 +413,8 @@ class _DatePickerState extends State<_DatePickerComponent> {
             onSelectedItemChanged: (int index) {
               selectedChangedWhenScrolling(index);
             },
+            selectionOverlay: widget.selectedOverlay,
+            diameterRatio: widget.diamterRatio,
             useMagnifier: true,
             itemBuilder: (BuildContext context, int index) {
               final content = stringAtIndexCB(index);
@@ -582,6 +590,10 @@ class _DatePickerState extends State<_DatePickerComponent> {
       height: theme.titleHeight,
       decoration: BoxDecoration(
         color: theme.headerColor ?? theme.backgroundColor,
+        border: Border(bottom: BorderSide(
+          color: theme.headerBorderColor,
+          width: 1.0,
+        ))
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
