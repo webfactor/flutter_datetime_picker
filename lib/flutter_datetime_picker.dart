@@ -413,8 +413,8 @@ class _DatePickerState extends State<_DatePickerComponent> {
             onSelectedItemChanged: (int index) {
               selectedChangedWhenScrolling(index);
             },
-            selectionOverlay: widget.selectedOverlay,
-            diameterRatio: widget.diamterRatio,
+            selectionOverlay: widget.selectedOverlay ?? CupertinoPickerDefaultSelectionOverlay(),
+            diameterRatio: widget.diameterRatio,
             useMagnifier: true,
             itemBuilder: (BuildContext context, int index) {
               final content = stringAtIndexCB(index);
