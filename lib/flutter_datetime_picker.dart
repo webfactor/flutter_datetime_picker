@@ -293,6 +293,8 @@ class _DatePickerRoute<T> extends PopupRoute<T> {
         locale: this.locale,
         route: this,
         pickerModel: pickerModel,
+        selectedOverlay: selectedOverlay,
+        diameterRatio: diameterRatio,
       ),
     );
     return InheritedTheme.captureAll(context, bottomSheet);
