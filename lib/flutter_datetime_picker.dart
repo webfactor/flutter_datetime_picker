@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:flutter_datetime_picker/src/datetime_picker_theme.dart';
+import 'package:flutter_datetime_picker/src/datetime_picker_theme.dart' as plugin;
 import 'package:flutter_datetime_picker/src/date_model.dart';
 import 'package:flutter_datetime_picker/src/i18n_model.dart';
 
@@ -46,7 +46,7 @@ class DatePicker {
     DatePickerFormat? datePickerFormat,
     locale: LocaleType.en,
     DateTime? currentTime,
-    DatePickerTheme? theme,
+    plugin.DatePickerTheme? theme,
     Widget? selectedOverlay,
     double diameterRatio = 1.1,
   }) async {
@@ -86,7 +86,7 @@ class DatePicker {
     DateCancelledCallback? onCancel,
     locale: LocaleType.en,
     DateTime? currentTime,
-    DatePickerTheme? theme,
+    plugin.DatePickerTheme? theme,
     Widget? selectedOverlay,
     double diameterRatio = 1.1,
   }) async {
@@ -123,7 +123,7 @@ class DatePicker {
     DateCancelledCallback? onCancel,
     locale: LocaleType.en,
     DateTime? currentTime,
-    DatePickerTheme? theme,
+    plugin.DatePickerTheme? theme,
     Widget? selectedOverlay,
     double diameterRatio = 1.1,
   }) async {
@@ -165,7 +165,7 @@ class DatePicker {
     DateCancelledCallback? onCancel,
     locale: LocaleType.en,
     DateTime? currentTime,
-    DatePickerTheme? theme,
+    plugin.DatePickerTheme? theme,
     Widget? selectedOverlay,
     double diameterRatio = 1.1,
   }) async {
@@ -204,7 +204,7 @@ class DatePicker {
     DateCancelledCallback? onCancel,
     locale: LocaleType.en,
     BasePickerModel? pickerModel,
-    DatePickerTheme? theme,
+    plugin.DatePickerTheme? theme,
     Widget? selectedOverlay,
     double diameterRatio = 1.1,
   }) async {
@@ -235,7 +235,7 @@ class _DatePickerRoute<T> extends PopupRoute<T> {
     this.onChanged,
     this.onConfirm,
     this.onCancel,
-    DatePickerTheme? theme,
+    plugin.DatePickerTheme? theme,
     this.barrierLabel,
     this.locale,
     this.selectedOverlay,
@@ -243,7 +243,7 @@ class _DatePickerRoute<T> extends PopupRoute<T> {
     RouteSettings? settings,
     BasePickerModel? pickerModel,
   })  : this.pickerModel = pickerModel ?? DatePickerModel(),
-        this.theme = theme ?? DatePickerTheme(),
+        this.theme = theme ?? plugin.DatePickerTheme(),
         super(settings: settings);
 
   final bool? showTitleActions;
@@ -254,7 +254,7 @@ class _DatePickerRoute<T> extends PopupRoute<T> {
   /// Customize design of date picker
   final DatePickerFormat? datePickerFormat;
   final LocaleType? locale;
-  final DatePickerTheme theme;
+  final plugin.DatePickerTheme theme;
   final BasePickerModel pickerModel;
   final Widget? selectedOverlay;
   final double diameterRatio;
@@ -357,7 +357,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
 
   @override
   Widget build(BuildContext context) {
-    DatePickerTheme theme = widget.route.theme;
+    plugin.DatePickerTheme theme = widget.route.theme;
     return GestureDetector(
       child: AnimatedBuilder(
         animation: widget.route.animation!,
@@ -390,7 +390,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
     }
   }
 
-  Widget _renderPickerView(DatePickerTheme theme) {
+  Widget _renderPickerView(plugin.DatePickerTheme theme) {
     Widget itemView =
         _renderItemView(theme, datePickerFormat: widget.datePickerFormat);
     if (widget.route.showTitleActions == true) {
@@ -406,7 +406,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
 
   Widget _renderColumnView(
     ValueKey key,
-    DatePickerTheme theme,
+    plugin.DatePickerTheme theme,
     StringAtIndexCallBack stringAtIndexCB,
     ScrollController scrollController,
     int layoutProportion,
@@ -464,7 +464,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
     );
   }
 
-  Widget _renderItemView(DatePickerTheme theme,
+  Widget _renderItemView(plugin.DatePickerTheme theme,
       {required DatePickerFormat datePickerFormat}) {
     return Container(
       color: theme.backgroundColor,
@@ -476,7 +476,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
   }
 
   Row _buildDatePickerFormat(
-      DatePickerFormat datePickerFormat, DatePickerTheme theme) {
+      DatePickerFormat datePickerFormat, plugin.DatePickerTheme theme) {
     switch (datePickerFormat) {
       case DatePickerFormat.yyyy_mm_dd:
         return _buildDatePickerWithYYYYMMDDFormat(theme);
@@ -489,7 +489,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
     }
   }
 
-  Row _buildDatePickerWithYYYYMMDDFormat(DatePickerTheme theme) {
+  Row _buildDatePickerWithYYYYMMDDFormat(plugin.DatePickerTheme theme) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
@@ -508,7 +508,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
     );
   }
 
-  Row _buildDatePickerWithMMDDYYYYFormat(DatePickerTheme theme) {
+  Row _buildDatePickerWithMMDDYYYYFormat(plugin.DatePickerTheme theme) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
@@ -528,7 +528,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
   }
 
   //// Build date picker with DD-MM-YYYY
-  Row _buildDatePickerWithDDMMYYYYFormat(DatePickerTheme theme) {
+  Row _buildDatePickerWithDDMMYYYYFormat(plugin.DatePickerTheme theme) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
@@ -547,7 +547,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
     );
   }
 
-  Container _buildYear(DatePickerTheme theme) {
+  Container _buildYear(plugin.DatePickerTheme theme) {
     return Container(
       child: widget.pickerModel.layoutProportions()[0] > 0
           ? _renderColumnView(
@@ -567,7 +567,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
     );
   }
 
-  Container _buildMonth(DatePickerTheme theme) {
+  Container _buildMonth(plugin.DatePickerTheme theme) {
     return Container(
       child: widget.pickerModel.layoutProportions()[1] > 0
           ? _renderColumnView(
@@ -587,7 +587,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
     );
   }
 
-  Container _buildDay(DatePickerTheme theme) {
+  Container _buildDay(plugin.DatePickerTheme theme) {
     return Container(
       child: widget.pickerModel.layoutProportions()[2] > 0
           ? _renderColumnView(
@@ -609,7 +609,7 @@ class _DatePickerState extends State<_DatePickerComponent> {
   }
 
   // Title View
-  Widget _renderTitleActionsView(DatePickerTheme theme) {
+  Widget _renderTitleActionsView(plugin.DatePickerTheme theme) {
     final done = _localeDone();
     final cancel = _localeCancel();
 
@@ -685,7 +685,7 @@ class _BottomPickerLayout extends SingleChildLayoutDelegate {
   final double progress;
   final int? itemCount;
   final bool? showTitleActions;
-  final DatePickerTheme theme;
+  final plugin.DatePickerTheme theme;
   final double bottomPadding;
 
   @override
